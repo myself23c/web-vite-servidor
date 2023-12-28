@@ -12,6 +12,9 @@ import {AuthProvider} from "../context/authContext"
 import {ProtectedRoute} from "./ProtectedRoute"
 import { TwitterCrawlerPage } from '../pages/TwitterCrawlerPage'
 import { RedditCrawlerPage } from '../pages/RedditCrawlerPage'
+import { FileUploader }  from '../pages/UploadPage'
+import { CrawlerDB}  from '../pages/CrawlerDB'
+import { URLSubmitter } from '../pages/CrawlerStart' 
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -23,6 +26,9 @@ function App() {
         <Route path="/"   element={<HomePage></HomePage>}></Route>
         <Route path="/login"   element={<LoginPage></LoginPage>}></Route>
         <Route path="/register"   element={<Register></Register>}></Route>
+        <Route path="upload" element={<FileUploader></FileUploader>}></Route>
+        <Route path="crawler-db" element={<CrawlerDB></CrawlerDB>}></Route>
+        <Route path="crawler-start" element={<URLSubmitter></URLSubmitter>}></Route>
         <Route element ={<ProtectedRoute></ProtectedRoute>}>
           <Route path="/tasks"   element={<TaskPage/>}></Route>
           <Route path="/add-task"   element={<h1> agregar tarea</h1>}></Route>
