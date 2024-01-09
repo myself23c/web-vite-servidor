@@ -24,7 +24,7 @@ const useFileOperations = () => {
     };
 
     const downloadFile = (fileName) => {
-        fetch(API + '/files' + fileName)
+        fetch(API + '/files/' + fileName)
             .then(response => response.blob())
             .then(blob => {
                 const url = URL.createObjectURL(blob);

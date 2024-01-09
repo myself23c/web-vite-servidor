@@ -16,6 +16,7 @@ import { FileUploader }  from '../pages/UploadPage'
 import { CrawlerDB}  from '../pages/CrawlerDB'
 import { URLSubmitter } from '../pages/CrawlerStart' 
 
+
 function App() {
   //const [count, setCount] = useState(0)
 
@@ -29,12 +30,13 @@ function App() {
         <Route path="upload" element={<FileUploader></FileUploader>}></Route>
         <Route path="crawler-db" element={<CrawlerDB></CrawlerDB>}></Route>
         <Route path="crawler-start" element={<URLSubmitter></URLSubmitter>}></Route>
+        <Route path="/twitter-crawler" element={<TwitterCrawlerPage></TwitterCrawlerPage>}></Route>
         <Route element ={<ProtectedRoute></ProtectedRoute>}>
           <Route path="/tasks"   element={<TaskPage/>}></Route>
           <Route path="/add-task"   element={<h1> agregar tarea</h1>}></Route>
           <Route path="/task"   element={<TaskPage></TaskPage>}></Route>
           <Route path="/task/:id"   element={<h1> updatetask</h1>}></Route>
-          <Route path="/twitter-crawler" element={<TwitterCrawlerPage></TwitterCrawlerPage>}></Route>
+          
           <Route path= "/reddit-crawler" element={<RedditCrawlerPage></RedditCrawlerPage>}> </Route>
           <Route path="/profile"   element={<ProfilePage></ProfilePage>}></Route>
         </Route>
