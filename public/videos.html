@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Videos</title>
+    <link rel="stylesheet" href="styleVideos.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="uploadForm">
+        <input type="file" id="videoInput" />
+        <button type="button" id="uploadButton">Subir video</button>
+      </form>
+    </div>
+
+    <!-- Contenedor para el reproductor de video -->
+    <div class="container">
+      <video id="videoPlayer" controls>
+        Tu navegador no soporta el elemento <code>video</code>.
+      </video>
+    </div>
+
+    <div class="container">
+      <h1>Lista de Videos</h1>
+      <div id="videoList" class="video-list">
+        <!-- La lista de videos se cargará aquí -->
+      </div>
+    </div>
+    <!-- Contenedor para el formulario de subida de archivos -->
+
+    <script>
+      // Función para cargar la lista de videos
+
+      let api = "http://194.163.129.32:3000/api/reproductor-db-videos";
+
+
+      function fetchVideos() {
+    fetch(api + "/files/videos")
+        .then((response) => response.json())
+        .then((videos) => {
+            const list = document.getElementById("videoList");
+            list.innerHTML = "";
+
+            videos.forEach(video => {
+        const videoElement = document.createElement('div');
+        videoElement.className = 'video-item';
+        videoElement.innerHTML = `
+            <span class="video-name" onclick="playVideo('${video.filename}')">${video.filename}</span>
+            <div class="video-controls">
+                <button onclick="downloadVideo('${video.filename}')">Descargar</button>
+                <button onclick="deleteVideo('${video.filename}')">Eliminar</button>
+            </div>
+        `;
+        list.appendChild(videoElement);
+    });
+        })
+        .catch((error) => console.error("Error al cargar la lista de videos:", error));
+}
+
+
+      // Función para eliminar un video
+      function deleteVideo(filename) {
+        fetch(api + `/delete/video/${filename}`, { method: "DELETE" })
+          .then((response) => {
+            if (response.ok) {
+              console.log("Video eliminado");
+              fetchVideos(); // Recargar la lista para reflejar la eliminación
+            } else {
+              console.error("Error al eliminar el video");
+            }
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      // Función para reproducir un video seleccionado
+      function playVideo(filename) {
+        const player = document.getElementById("videoPlayer");
+        player.src = api + `/download/video/${filename}`; // Cambia esta línea
+        player.play();
+      }
+
+      // Función para subir un video
+      function uploadVideo() {
+        const input = document.getElementById("videoInput");
+        const data = new FormData();
+        data.append("video", input.files[0]);
+
+        fetch(api + "/upload/video", {
+          method: "POST",
+          body: data,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al subir el video");
+            }
+            return response.text();
+          })
+          .then((message) => {
+            console.log(message);
+            fetchVideos(); // Recarga la lista de videos después de la subida
+          })
+          .catch((error) => console.error("Error al subir el video:", error));
+      }
+
+      // Añade un evento click al botón de subida
+      const uploadButton = document.getElementById("uploadButton");
+      uploadButton.addEventListener("click", uploadVideo);
+
+      // Función para descargar un video seleccionado
+function downloadVideo(filename) {
+    // Ruta adaptada para la descarga de videos
+    window.location.href = api + `/download-direct/video/${filename}`;
+}
+
+      // Cargar los videos al cargar la página
+      document.addEventListener("DOMContentLoaded", fetchVideos);
+    </script>
+  </body>
+</html>

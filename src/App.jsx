@@ -15,6 +15,9 @@ import { RedditCrawlerPage } from '../pages/RedditCrawlerPage'
 import { FileUploader }  from '../pages/UploadPage'
 import { CrawlerDB}  from '../pages/CrawlerDB'
 import { URLSubmitter } from '../pages/CrawlerStart' 
+import MusicPlayer from "../components/test-music-player/MusicPlayer"
+import { AudioPlayerProvider } from "../components/test-music-player/AudioPlayerContext";
+import { IndexHtmlLoader, VideosHtmlLoader } from '../pages/publicPage';
 
 
 function App() {
@@ -32,6 +35,9 @@ function App() {
         <Route path="crawler-start" element={<URLSubmitter></URLSubmitter>}></Route>
         <Route path="/twitter-crawler" element={<TwitterCrawlerPage></TwitterCrawlerPage>}></Route>
         <Route path= "/reddit-crawler" element={<RedditCrawlerPage></RedditCrawlerPage>}> </Route>
+        <Route path= "/music-player" element={<AudioPlayerProvider><MusicPlayer></MusicPlayer></AudioPlayerProvider>}> </Route>
+        <Route path="/music-player-static" element={<IndexHtmlLoader />}></Route>
+        <Route path="/videos-static" element={<VideosHtmlLoader />}></Route>
         <Route element ={<ProtectedRoute></ProtectedRoute>}>
           <Route path="/tasks"   element={<TaskPage/>}></Route>
           <Route path="/add-task"   element={<h1> agregar tarea</h1>}></Route>

@@ -1,0 +1,17 @@
+.music-player > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    margin: 20px auto;
+}
+
+.music-player-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    margin: 20px auto;
+    border: 1px solid #ccc; /* Margen sólido */
+    background-color: #3e4142; /* Fondo gris claro */
+}

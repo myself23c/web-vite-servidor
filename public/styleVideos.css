@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #f0f0f0;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+}
+
+.container {
+    width: 800px; /* Ancho fijo para cada contenedor */
+    background-color: #ccc; /* Fondo gris claro */
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.video-list-item {
+    margin-bottom: 12px; /* Espaciado reducido entre elementos de la lista */
+}
+
+#videoPlayer {
+    width: 100%;
+    max-width: 800px; /* Ajuste de ancho máximo para el reproductor */
+}
+
+button {
+    cursor: pointer;
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+input[type="file"] {
+    border: 1px solid #aaa;
+    padding: 10px;
+}
+
+
+.video-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.video-name {
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+}
+
+.video-controls {
+    display: flex;
+    gap: 10px; /* Espacio entre botones */
+}
+
+.video-name {
+    flex-grow: 1;
+    color: #246474; /* Un color amarillo para contraste con el gris */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    transition: color 0.3s; /* Transición suave para el cambio de color */
+}
+
+.video-name:hover {
+    color: #02191f; /* Cambio a un color azul claro en hover */
+}
+
+
+
+
